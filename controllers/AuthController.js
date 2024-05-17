@@ -17,15 +17,10 @@ export const SignUp = async (request, response) => {
     const token = createSecretToken(user._id);
 
     return response.status(201)
-      .cookie("token", token, {
-        withCredentials: true,
-        httpOnly: true,
-        sameSite: "none",
-        secure: true
-      })
       .json({
         message: "User signed in successfully",
-        success: true
+        success: true,
+        token: token
     })
   } catch (error) {
     console.error(error);
@@ -50,15 +45,10 @@ export const Login = async (request, response) => {
 
     const token = createSecretToken(user._id);
     return response.status(200)
-      .cookie("token", token, {
-        withCredentials: true,
-        httpOnly: true,
-        sameSite: "none",
-        secure: true
-      })
       .json({
         message: "User logged in successfully.",
-        success: true
+        success: true,
+        token: token,
     })
   } catch (error) {
     console.error(error); 
